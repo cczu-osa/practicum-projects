@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdint.h>
 #include "bitmap.h"
 #include "LogUtils/log_utils.h"
 
