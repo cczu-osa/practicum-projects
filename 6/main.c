@@ -36,7 +36,7 @@ void verticalFlipGray();
 void verticalFlipOriginal();
 
 int main(int argc, char **argv) {
-    printf("\n\n---------数字图像处理 点运算 v1.0.0---------\n\n");
+    printf("\n\n---------数字图像处理 几何变换1 v1.0.0---------\n\n");
 
     if (argc <= 1) {
         printf("用法: 5 [-o <output-file-path>] <source-file-path>\n");
