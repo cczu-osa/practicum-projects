@@ -1,0 +1,10 @@
+E:\Manage\Web\bin\Web.dll
+E:\Manage\Web\bin\Web.pdb
+E:\Manage\Web\bin\BLL.dll
+E:\Manage\Web\bin\DAL.dll
+E:\Manage\Web\bin\MySql.Data.dll
+E:\Manage\Web\bin\BLL.pdb
+E:\Manage\Web\bin\DAL.pdb
+E:\Manage\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
+E:\Manage\Web\obj\Debug\Web.dll
+E:\Manage\Web\obj\Debug\Web.pdb

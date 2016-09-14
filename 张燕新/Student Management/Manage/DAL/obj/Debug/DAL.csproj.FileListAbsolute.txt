@@ -1,0 +1,10 @@
+E:\Manage\DAL\bin\Debug\DAL.dll
+E:\Manage\DAL\bin\Debug\DAL.pdb
+E:\Manage\DAL\bin\Debug\MySql.Data.dll
+E:\Manage\DAL\bin\Debug\MySql.Data.Entity.dll
+E:\Manage\DAL\bin\Debug\MySql.Data.Entity.EF6.dll
+E:\Manage\DAL\bin\Debug\MySql.Fabric.Plugin.dll
+E:\Manage\DAL\bin\Debug\MySql.Web.dll
+E:\Manage\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+E:\Manage\DAL\obj\Debug\DAL.dll
+E:\Manage\DAL\obj\Debug\DAL.pdb

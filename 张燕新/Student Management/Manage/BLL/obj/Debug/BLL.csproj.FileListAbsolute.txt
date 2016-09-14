@@ -1,0 +1,12 @@
+E:\Manage\BLL\bin\Debug\BLL.dll
+E:\Manage\BLL\bin\Debug\BLL.pdb
+E:\Manage\BLL\bin\Debug\DAL.dll
+E:\Manage\BLL\bin\Debug\MySql.Data.dll
+E:\Manage\BLL\bin\Debug\MySql.Data.Entity.dll
+E:\Manage\BLL\bin\Debug\MySql.Data.Entity.EF6.dll
+E:\Manage\BLL\bin\Debug\MySql.Fabric.Plugin.dll
+E:\Manage\BLL\bin\Debug\MySql.Web.dll
+E:\Manage\BLL\bin\Debug\DAL.pdb
+E:\Manage\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\Manage\BLL\obj\Debug\BLL.dll
+E:\Manage\BLL\obj\Debug\BLL.pdb
