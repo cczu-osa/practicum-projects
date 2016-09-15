@@ -41,7 +41,8 @@ namespace BLL
 		//SQL语句未写。
 		public DataSet GetSelectCourse(string StudentID)
 		{
-			string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where StudentID='{0}';SELECT Courses.*,Temp.Status FROM Courses LEFT JOIN Temp ON Courses.CourseID=Temp.CourseID;", StudentID);
+			//string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where StudentID='{0}';SELECT Courses.*,Temp.Status FROM Courses LEFT JOIN Temp ON Courses.CourseID=Temp.CourseID;", StudentID);
+			string sql = string.Format("SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,SelectCourse.Status FROM Courses INNER JOIN SelectCourse ON Courses.CourseID=SelectCourse.CourseID INNER JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID WHERE SelectCourse.StudentID='{0}'", StudentID);
 			DataSet ds = DBHelper.getDataSet(sql, "SelectStatus");
 			return ds;
 		}
