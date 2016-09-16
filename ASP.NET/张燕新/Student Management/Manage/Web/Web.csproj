@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLeft.ascx" />
+    <Content Include="A_AddStudent.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ModifyPassword.aspx" />
     <Content Include="StudentLeft.ascx" />
@@ -82,6 +83,13 @@
     </Compile>
     <Compile Include="AdminMasterPage.Master.designer.cs">
       <DependentUpon>AdminMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="A_AddStudent.aspx.cs">
+      <DependentUpon>A_AddStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="A_AddStudent.aspx.designer.cs">
+      <DependentUpon>A_AddStudent.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

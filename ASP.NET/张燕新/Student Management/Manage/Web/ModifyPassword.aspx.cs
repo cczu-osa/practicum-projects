@@ -20,11 +20,11 @@ namespace Web
 		{
 			if (transfer.ModifyPassword(Session["UserName"].ToString(), OldPassword.Text.ToString(), NewPassword.Text.ToString()))
 			{
-				Response.Write("密码修改成功！");
+				Response.Write("<script language=javascript>alert('密码修改成功！')</script>");
 			}
 			else
 			{
-				Response.Write("密码修改失败！");
+				Response.Write("<script language=javascript>alert('密码修改失败！')</script>");
 			}
 		}
 		protected void OnButtonReset(object sender, EventArgs e)

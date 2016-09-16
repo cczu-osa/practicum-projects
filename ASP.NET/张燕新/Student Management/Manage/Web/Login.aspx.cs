@@ -25,21 +25,24 @@ namespace Web
 			switch (status)
 			{
 				case 0://用户名或密码错误
-					LabelMessage.Text = "您输入的用户名或密码错误，请检查后重新输入！";
+					Response.Write("<script language=javascript>alert('您输入的用户名或密码错误，请检查后重新输入！')</script>");
 					break;
 				case 1://学生登陆成功
 					Session["UserName"] = UserName;
                     Session["UserRole"] = "Student";
+					Response.Write("<script language=javascript>alert('登录成功！')</script>");
 					Response.Redirect("WelcomeStudent.aspx");
 					break;
 				case 2://教师登陆成功
 					Session["UserName"] = UserName;
 					Session["UserRole"] = "Teacher";
+					Response.Write("<script language=javascript>alert('登录成功！')</script>");
 					Response.Redirect("WelcomeTeacher.aspx");
 					break;
 				case 3://管理员登陆成功
 					Session["UserName"] = UserName;
 					Session["UserRole"] = "Admin";
+					Response.Write("<script language=javascript>alert('登录成功！')</script>");
 					Response.Redirect("WelcomeAdmin.aspx");
 					break;
 			}
