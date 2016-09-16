@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TeacherMasterPage.master.cs" Inherits="Web.TeacherMasterPage" %>
 
+<%@ Register src="TeacherLeft.ascx" tagname="TeacherLeft" tagprefix="uc1" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -21,6 +23,7 @@
 			</tr>
 			<tr>
 				<td style="width: 140px; height: 398px;" valign=top>
+					<uc1:TeacherLeft ID="TeacherLeft1" runat="server" />
 				</td>
 				<td style="width: 500px; height: 300px;" valign=top>
 					<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

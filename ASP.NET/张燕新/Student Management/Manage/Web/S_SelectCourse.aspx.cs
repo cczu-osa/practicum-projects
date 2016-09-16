@@ -15,15 +15,16 @@ namespace Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			bind();
+			if (!Page.IsPostBack) bind();
 		}
 
 		//GridView绑定数据
 		private void bind()
 		{
 			DataSet ds = transfer.GetSelectCourse(Session["UserName"].ToString());
-			GridView.DataSource = ds.Tables["SelectStatus"].DefaultView;
+			GridView.DataSource = ds.Tables["SelectCourse"].DefaultView;
 			GridView.DataBind();
+			ds.Dispose();
 		}
 		// GridView的RowCommand事件
 		protected void RowCommand(object sender, GridViewCommandEventArgs e)

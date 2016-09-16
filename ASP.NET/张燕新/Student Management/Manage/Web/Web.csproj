@@ -51,11 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLeft.ascx" />
+    <Content Include="A_AddCourse.aspx" />
     <Content Include="A_AddStudent.aspx" />
+    <Content Include="A_AddTeacher.aspx" />
+    <Content Include="A_ChangeCourse.aspx" />
+    <Content Include="A_ChangeStudent.aspx" />
+    <Content Include="A_ChangeTeacher.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ModifyPassword.aspx" />
     <Content Include="StudentLeft.ascx" />
     <Content Include="S_SelectCourse.aspx" />
+    <Content Include="TeacherLeft.ascx" />
+    <Content Include="T_TeachManage.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -84,12 +91,47 @@
     <Compile Include="AdminMasterPage.Master.designer.cs">
       <DependentUpon>AdminMasterPage.Master</DependentUpon>
     </Compile>
+    <Compile Include="A_AddCourse.aspx.cs">
+      <DependentUpon>A_AddCourse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="A_AddCourse.aspx.designer.cs">
+      <DependentUpon>A_AddCourse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="A_AddStudent.aspx.cs">
       <DependentUpon>A_AddStudent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="A_AddStudent.aspx.designer.cs">
       <DependentUpon>A_AddStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="A_AddTeacher.aspx.cs">
+      <DependentUpon>A_AddTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="A_AddTeacher.aspx.designer.cs">
+      <DependentUpon>A_AddTeacher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="A_ChangeCourse.aspx.cs">
+      <DependentUpon>A_ChangeCourse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="A_ChangeCourse.aspx.designer.cs">
+      <DependentUpon>A_ChangeCourse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="A_ChangeStudent.aspx.cs">
+      <DependentUpon>A_ChangeStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="A_ChangeStudent.aspx.designer.cs">
+      <DependentUpon>A_ChangeStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="A_ChangeTeacher.aspx.cs">
+      <DependentUpon>A_ChangeTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="A_ChangeTeacher.aspx.designer.cs">
+      <DependentUpon>A_ChangeTeacher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -127,12 +169,26 @@
     <Compile Include="S_SelectCourse.aspx.designer.cs">
       <DependentUpon>S_SelectCourse.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TeacherLeft.ascx.cs">
+      <DependentUpon>TeacherLeft.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeacherLeft.ascx.designer.cs">
+      <DependentUpon>TeacherLeft.ascx</DependentUpon>
+    </Compile>
     <Compile Include="TeacherMasterPage.Master.cs">
       <DependentUpon>TeacherMasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TeacherMasterPage.Master.designer.cs">
       <DependentUpon>TeacherMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="T_TeachManage.aspx.cs">
+      <DependentUpon>T_TeachManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="T_TeachManage.aspx.designer.cs">
+      <DependentUpon>T_TeachManage.aspx</DependentUpon>
     </Compile>
     <Compile Include="WelcomeAdmin.aspx.cs">
       <DependentUpon>WelcomeAdmin.aspx</DependentUpon>

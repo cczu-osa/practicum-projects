@@ -41,7 +41,47 @@ namespace BLL
 		public DataSet GetSelectCourse(string StudentID)
 		{
 			string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where StudentID='{0}';SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,Temp.Status FROM Courses LEFT JOIN Temp ON Courses.CourseID=Temp.CourseID LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID", StudentID);
-			DataSet ds = DBHelper.getDataSet(sql, "SelectStatus");
+			DataSet ds = DBHelper.getDataSet(sql, "SelectCourse");
+			return ds;
+		}
+
+		//获取教师任课信息
+		public DataSet GetTeachCourseInfo(string TeacherID)
+		{
+			string sql = string.Format("SELECT Courses.CourseID,Courses.CourseName FROM Courses WHERE Courses.TeacherID = '{0}'", TeacherID);
+			DataSet ds = DBHelper.getDataSet(sql, "TeachCourse");
+			return ds;
+		}
+
+		//获取上课学生信息
+		public DataSet GetTeachStudent(string CourseID)
+		{
+			string sql = string.Format("SELECT Student.* FROM Student WHERE StudentID IN (SELECT StudentID FROM SelectCourse WHERE CourseID = '{0}')", CourseID);
+			DataSet ds = DBHelper.getDataSet(sql, "TeachStudent");
+			return ds;
+		}
+		
+		//获取所有学生信息
+		public DataSet GetStudentInfo()
+		{
+			string sql = string.Format("SELECT * FROM Student");
+			DataSet ds = DBHelper.getDataSet(sql, "StudentInfo");
+			return ds;
+		}
+
+		//获取所有教师信息
+		public DataSet GetTeacherInfo()
+		{
+			string sql = string.Format("SELECT * FROM Teacher");
+			DataSet ds = DBHelper.getDataSet(sql, "TeacherInfo");
+			return ds;
+		}
+
+		//获取所以课程信息
+		public DataSet GetCourseInfo()
+		{
+			string sql = string.Format("SELECT Courses.*,Teacher.TeacherName FROM Courses LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID");
+			DataSet ds = DBHelper.getDataSet(sql, "CourseInfo");
 			return ds;
 		}
 
@@ -112,6 +152,65 @@ namespace BLL
 			object obj = DBHelper.ExecuteScalar(sql);
 			if (obj != null) return false;
 			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Teacher');INSERT INTO Teacher VALUES('{0}','{1}')", ID, Name, PassWord);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//添加课程
+		public bool AddCourse(string CourseID, string Name, string TeacherID)
+		{
+			string sql = string.Format("select Courses.CourseID from Courses where CourseID = '{0}'", CourseID);
+			object obj = DBHelper.ExecuteScalar(sql);
+			if (obj != null) return false;
+			sql = string.Format("INSERT INTO Courses VALUES('{0}','{1}','{2}')", CourseID, Name, TeacherID);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//修改学生信息
+		public bool UpdateStudent(string ID,string Name)
+		{
+			string sql = string.Format("UPDATE Student SET StudentName = '{1}' WHERE StudentID = '{0}'",ID, Name);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//删除学生信息
+		public bool DeleteStudent(string ID)
+		{
+			string sql = string.Format("DELETE FROM Student WHERE Student.StudentID = '{0}';DELETE FROM Users WHERE Users.UserName = '{0}'",ID);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//修改教师信息
+		public bool UpdateTeacher(string ID, string Name)
+		{
+			string sql = string.Format("UPDATE Teacher SET TeacherName = '{1}' WHERE TeacherID = '{0}'", ID, Name);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//删除教师信息
+		public bool DeleteTeacher(string ID)
+		{
+			string sql = string.Format("DELETE FROM Teacher WHERE Teacher.TeacherID = '{0}';DELETE FROM Users WHERE Users.UserName = '{0}'", ID);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//修改课程信息
+		public bool UpdateCourse(string ID, string Name, string TeacherID)
+		{
+			string sql = string.Format("UPDATE Courses SET CourseName='{1}',TeacherID = '{2}' WHERE CourseID = '{0}'", ID, Name,TeacherID);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//删除课程信息
+		public bool DeleteCourse(string ID)
+		{
+			string sql = string.Format("DELETE FROM Courses WHERE Courses.CourseID = '{0}'", ID);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
