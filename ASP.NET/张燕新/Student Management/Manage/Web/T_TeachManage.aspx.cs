@@ -24,6 +24,7 @@ namespace Web
 				DropDownList.DataBind();
 				ds.Dispose();
 			}
+			bind();
 		}
 
 		//GridView绑定数据
@@ -42,6 +43,28 @@ namespace Web
 
 		protected void DropDownList_TextChanged(object sender, EventArgs e)
 		{
+			bind();
+		}
+
+		protected void GridView_RowEditing(object sender, GridViewEditEventArgs e)
+		{
+			GridView.EditIndex = e.NewEditIndex;
+			bind();
+		}
+
+		protected void GridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+		{
+			string CourseID = DropDownList.SelectedValue.ToString();
+			string StudentID = GridView.Rows[e.RowIndex].Cells[0].Text.ToString();
+			string Score = ((TextBox)GridView.Rows[e.RowIndex].Cells[2].Controls[0]).Text.ToString();
+			transfer.UpdateScore(CourseID, StudentID, Score);
+			GridView.EditIndex = -1;
+			bind();
+		}
+
+		protected void GridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+		{
+			GridView.EditIndex = -1;
 			bind();
 		}
 	}

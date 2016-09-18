@@ -14,7 +14,11 @@ namespace Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-
+			if (!IsPostBack)
+			{
+				Session["UserName"] = "";
+				Session["UserRole"] = "";
+			}
 		}
 		protected void OnButtonLogin(object sender, EventArgs e)
 		{

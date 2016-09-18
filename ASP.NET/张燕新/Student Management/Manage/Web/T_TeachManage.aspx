@@ -7,10 +7,14 @@
 		ontextchanged="DropDownList_TextChanged">
 	</asp:DropDownList>
 	<br />
-	<asp:GridView ID="GridView" runat="server" AutoGenerateColumns="False">
+	<asp:GridView ID="GridView" runat="server" AutoGenerateColumns="False" 
+		onrowcancelingedit="GridView_RowCancelingEdit" 
+		onrowediting="GridView_RowEditing" onrowupdating="GridView_RowUpdating">
 		<Columns>
 			<asp:BoundField DataField="StudentID" HeaderText="学生学号" ReadOnly="True" />
 			<asp:BoundField DataField="StudentName" HeaderText="学生姓名" ReadOnly="True" />
+			<asp:BoundField DataField="Score" HeaderText="成绩" NullDisplayText="0" />
+			<asp:CommandField ShowEditButton="True" />
 		</Columns>
 	</asp:GridView>
 </asp:Content>

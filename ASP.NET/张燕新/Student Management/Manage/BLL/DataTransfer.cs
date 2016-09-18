@@ -40,7 +40,7 @@ namespace BLL
 		//获取学生选课信息
 		public DataSet GetSelectCourse(string StudentID)
 		{
-			string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where StudentID='{0}';SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,Temp.Status FROM Courses LEFT JOIN Temp ON Courses.CourseID=Temp.CourseID LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID", StudentID);
+			string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where StudentID='{0}';SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,Temp.Status,Temp.Score FROM Courses LEFT JOIN Temp ON Courses.CourseID=Temp.CourseID LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID", StudentID);
 			DataSet ds = DBHelper.getDataSet(sql, "SelectCourse");
 			return ds;
 		}
@@ -56,7 +56,7 @@ namespace BLL
 		//获取上课学生信息
 		public DataSet GetTeachStudent(string CourseID)
 		{
-			string sql = string.Format("SELECT Student.* FROM Student WHERE StudentID IN (SELECT StudentID FROM SelectCourse WHERE CourseID = '{0}')", CourseID);
+			string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where CourseID='{0}';SELECT Student.*,Temp.Score FROM Student,Temp WHERE Student.StudentID=Temp.StudentID", CourseID);
 			DataSet ds = DBHelper.getDataSet(sql, "TeachStudent");
 			return ds;
 		}
@@ -211,6 +211,14 @@ namespace BLL
 		public bool DeleteCourse(string ID)
 		{
 			string sql = string.Format("DELETE FROM Courses WHERE Courses.CourseID = '{0}'", ID);
+			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
+			else return true;
+		}
+
+		//修改学生成绩
+		public bool UpdateScore(string CourseID,string StudentID, string Score)
+		{
+			string sql = string.Format("UPDATE SelectCourse SET Score='{2}' WHERE CourseID = '{0}' AND StudentID = '{1}'", CourseID, StudentID, Score);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
