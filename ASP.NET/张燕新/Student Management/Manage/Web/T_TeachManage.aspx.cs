@@ -23,8 +23,8 @@ namespace Web
 				DropDownList.DataValueField = "CourseID";
 				DropDownList.DataBind();
 				ds.Dispose();
+				bind();
 			}
-			bind();
 		}
 
 		//GridView绑定数据
