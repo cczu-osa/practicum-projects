@@ -6,7 +6,7 @@
 		<table>
 			<tr>
 				<td style="width:96px; text-align: right;">
-					工号：
+					教师工号：
 				</td>
 				<td style="width:360px; text-align: left;" colspan="3">
 					<asp:TextBox ID="TextTeacherID" runat="server"></asp:TextBox>
@@ -44,6 +44,30 @@
 						ErrorMessage="请确认密码" Display="Dynamic"></asp:RequiredFieldValidator>
 					<asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="TextTeacherPassword"
 						ControlToValidate="TextConfirmPassWord" ErrorMessage="两次密码不相符" Display="Dynamic"></asp:CompareValidator>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					教师性别：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextTeacherSex" runat="server"></asp:TextBox>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					教师年龄：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextTeacherAge" runat="server"></asp:TextBox>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					教师专业：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextTeacherMajor" runat="server"></asp:TextBox>
 				</td>
 			</tr>
 		</table>

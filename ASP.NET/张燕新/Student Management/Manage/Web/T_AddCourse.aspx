@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.Master" AutoEventWireup="true" CodeBehind="A_AddCourse.aspx.cs" Inherits="Web.A_AddCourse" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TeacherMasterPage.Master" AutoEventWireup="true" CodeBehind="T_AddCourse.aspx.cs" Inherits="Web.A_AddCourse" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -22,16 +22,6 @@
 					<asp:TextBox ID="TextCourseName" runat="server"></asp:TextBox>
 					<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextCourseName"
 						ErrorMessage="请输入课程名" Display="Dynamic"></asp:RequiredFieldValidator>
-				</td>
-			</tr>
-			<tr>
-				<td style="width:96px;text-align: right">
-					教师编号：
-				</td>
-				<td style="width:360px; text-align: left" colspan="3">
-					<asp:TextBox ID="TextTeacherID" runat="server"></asp:TextBox>
-					<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextTeacherID"
-						ErrorMessage="请输入教师编号" Display="Dynamic"></asp:RequiredFieldValidator>
 				</td>
 			</tr>
 		</table>

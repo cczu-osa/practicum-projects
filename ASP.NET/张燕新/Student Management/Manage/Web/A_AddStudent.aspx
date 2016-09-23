@@ -48,6 +48,38 @@
 						ControlToValidate="TextConfirmPassWord" ErrorMessage="两次密码不相符" Display="Dynamic"></asp:CompareValidator>
 				</td>
 			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					学生性别：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextStudentSex" runat="server"></asp:TextBox>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					学生年龄：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextStudentAge" runat="server"></asp:TextBox>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					学生专业：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextStudentMajor" runat="server"></asp:TextBox>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					学生班级：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextStudentClass" runat="server"></asp:TextBox>
+				</td>
+			</tr>
 		</table>
 		<table>
 			<tr>

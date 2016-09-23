@@ -21,7 +21,7 @@ namespace Web
 		//GridView绑定数据
 		private void bind()
 		{
-			DataSet ds = transfer.GetCourseInfo();
+			DataSet ds = transfer.GetCourseInfo(Session["UserName"].ToString());
 			GridView.DataSource = ds.Tables["CourseInfo"].DefaultView;
 			GridView.DataBind();
 			ds.Dispose();

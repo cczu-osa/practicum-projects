@@ -19,13 +19,17 @@ namespace Web
 		
 		protected void OnButtonAdd(object sender, EventArgs e)
 		{
-			if (transfer.AddStudent(TextStudentID.Text.ToString(), TextStudentName.Text.ToString(), TextStudentPassWord.Text.ToString()))
+			if (transfer.AddStudent(TextStudentID.Text.ToString(), TextStudentName.Text.ToString(), TextStudentPassWord.Text.ToString(), TextStudentSex.Text.ToString(), TextStudentAge.Text.ToString(), TextStudentMajor.Text.ToString(), TextStudentClass.Text.ToString()))
 			{
 				Response.Write("<script language=javascript>alert('添加学生成功！')</script>");
 				TextStudentID.Text = "";
 				TextStudentName.Text = "";
 				TextStudentPassWord.Text = "";
 				TextConfirmPassWord.Text = "";
+				TextStudentSex.Text = "";
+				TextStudentAge.Text = "";
+				TextStudentMajor.Text = "";
+				TextStudentClass.Text = "";
 			}
 			else
 			{
@@ -39,6 +43,10 @@ namespace Web
 			TextStudentName.Text = "";
 			TextStudentPassWord.Text = "";
 			TextConfirmPassWord.Text = "";
+			TextStudentSex.Text = "";
+			TextStudentAge.Text = "";
+			TextStudentMajor.Text = "";
+			TextStudentClass.Text = "";
 		}
 	}
 }

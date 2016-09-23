@@ -35,19 +35,19 @@ namespace Web
 					Session["UserName"] = UserName;
                     Session["UserRole"] = "Student";
 					Response.Write("<script language=javascript>alert('登录成功！')</script>");
-					Response.Redirect("WelcomeStudent.aspx");
+					Response.Redirect("S_info.aspx");
 					break;
 				case 2://教师登陆成功
 					Session["UserName"] = UserName;
 					Session["UserRole"] = "Teacher";
 					Response.Write("<script language=javascript>alert('登录成功！')</script>");
-					Response.Redirect("WelcomeTeacher.aspx");
+					Response.Redirect("T_info.aspx");
 					break;
 				case 3://管理员登陆成功
 					Session["UserName"] = UserName;
 					Session["UserRole"] = "Admin";
 					Response.Write("<script language=javascript>alert('登录成功！')</script>");
-					Response.Redirect("WelcomeAdmin.aspx");
+					Response.Redirect("A_info.aspx");
 					break;
 			}
 		}

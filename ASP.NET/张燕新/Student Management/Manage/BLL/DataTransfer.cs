@@ -23,6 +23,12 @@ namespace BLL
 			else return 0;
 		}
 
+		public MySqlDataReader GetSelfinfo(string ID,string Role)
+		{
+			string sql = string.Format("select * from {1} where {1}ID = '{0}'", ID, Role);
+			MySqlDataReader dr = DBHelper.ExecuteReader(sql);
+			return dr;
+		}
 		//修改密码
 		public bool ModifyPassword(string UserName,string OldPassWord,string NewPassWord)
 		{
@@ -78,9 +84,9 @@ namespace BLL
 		}
 
 		//获取所以课程信息
-		public DataSet GetCourseInfo()
+		public DataSet GetCourseInfo(string TeacherID)
 		{
-			string sql = string.Format("SELECT Courses.*,Teacher.TeacherName FROM Courses LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID");
+			string sql = string.Format("SELECT Courses.*,Teacher.TeacherName FROM Courses LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID WHERE Teacher.TeacherID = {0}", TeacherID);
 			DataSet ds = DBHelper.getDataSet(sql, "CourseInfo");
 			return ds;
 		}
@@ -134,24 +140,24 @@ namespace BLL
 		}
 
 		//添加学生
-		public bool AddStudent(string ID, string Name, string PassWord)
+		public bool AddStudent(string ID, string Name, string PassWord, string Sex, string Age, string Major, string Class)
 		{
 
 			string sql = string.Format("select Users.UserRole from Users where UserName = '{0}'", ID);
 			object obj = DBHelper.ExecuteScalar(sql);
 			if (obj != null) return false;
-			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Student');INSERT INTO Student VALUES('{0}','{1}')", ID, Name, PassWord);
+			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Student');INSERT INTO Student VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", ID, Name, PassWord, Sex, Age, Major, Class);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
 
 		//添加教师
-		public bool AddTeacher(string ID, string Name, string PassWord)
+		public bool AddTeacher(string ID, string Name, string PassWord, string Sex, string Age, string Major)
 		{
 			string sql = string.Format("select Users.UserRole from Users where UserName = '{0}'", ID);
 			object obj = DBHelper.ExecuteScalar(sql);
 			if (obj != null) return false;
-			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Teacher');INSERT INTO Teacher VALUES('{0}','{1}')", ID, Name, PassWord);
+			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Teacher');INSERT INTO Teacher VALUES('{0}','{1}','{2}','{3}','{4}')", ID, Name, PassWord, Sex, Age, Major);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}

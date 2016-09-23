@@ -33,6 +33,26 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.6.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity, Version=6.6.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Data.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Fabric.Plugin, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Fabric.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web, Version=6.6.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -51,10 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLeft.ascx" />
-    <Content Include="A_AddCourse.aspx" />
+    <Content Include="T_AddCourse.aspx" />
     <Content Include="A_AddStudent.aspx" />
     <Content Include="A_AddTeacher.aspx" />
-    <Content Include="A_ChangeCourse.aspx" />
+    <Content Include="T_ChangeCourse.aspx" />
     <Content Include="A_ChangeStudent.aspx" />
     <Content Include="A_ChangeTeacher.aspx" />
     <Content Include="Login.aspx" />
@@ -72,9 +92,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="WelcomeAdmin.aspx" />
-    <Content Include="WelcomeStudent.aspx" />
-    <Content Include="WelcomeTeacher.aspx" />
+    <Content Include="A_info.aspx" />
+    <Content Include="S_info.aspx" />
+    <Content Include="T_info.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminLeft.ascx.cs">
@@ -91,12 +111,12 @@
     <Compile Include="AdminMasterPage.Master.designer.cs">
       <DependentUpon>AdminMasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="A_AddCourse.aspx.cs">
-      <DependentUpon>A_AddCourse.aspx</DependentUpon>
+    <Compile Include="T_AddCourse.aspx.cs">
+      <DependentUpon>T_AddCourse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="A_AddCourse.aspx.designer.cs">
-      <DependentUpon>A_AddCourse.aspx</DependentUpon>
+    <Compile Include="T_AddCourse.aspx.designer.cs">
+      <DependentUpon>T_AddCourse.aspx</DependentUpon>
     </Compile>
     <Compile Include="A_AddStudent.aspx.cs">
       <DependentUpon>A_AddStudent.aspx</DependentUpon>
@@ -112,12 +132,12 @@
     <Compile Include="A_AddTeacher.aspx.designer.cs">
       <DependentUpon>A_AddTeacher.aspx</DependentUpon>
     </Compile>
-    <Compile Include="A_ChangeCourse.aspx.cs">
-      <DependentUpon>A_ChangeCourse.aspx</DependentUpon>
+    <Compile Include="T_ChangeCourse.aspx.cs">
+      <DependentUpon>T_ChangeCourse.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="A_ChangeCourse.aspx.designer.cs">
-      <DependentUpon>A_ChangeCourse.aspx</DependentUpon>
+    <Compile Include="T_ChangeCourse.aspx.designer.cs">
+      <DependentUpon>T_ChangeCourse.aspx</DependentUpon>
     </Compile>
     <Compile Include="A_ChangeStudent.aspx.cs">
       <DependentUpon>A_ChangeStudent.aspx</DependentUpon>
@@ -190,26 +210,26 @@
     <Compile Include="T_TeachManage.aspx.designer.cs">
       <DependentUpon>T_TeachManage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WelcomeAdmin.aspx.cs">
-      <DependentUpon>WelcomeAdmin.aspx</DependentUpon>
+    <Compile Include="A_info.aspx.cs">
+      <DependentUpon>A_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WelcomeAdmin.aspx.designer.cs">
-      <DependentUpon>WelcomeAdmin.aspx</DependentUpon>
+    <Compile Include="A_info.aspx.designer.cs">
+      <DependentUpon>A_info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WelcomeStudent.aspx.cs">
-      <DependentUpon>WelcomeStudent.aspx</DependentUpon>
+    <Compile Include="S_info.aspx.cs">
+      <DependentUpon>S_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WelcomeStudent.aspx.designer.cs">
-      <DependentUpon>WelcomeStudent.aspx</DependentUpon>
+    <Compile Include="S_info.aspx.designer.cs">
+      <DependentUpon>S_info.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WelcomeTeacher.aspx.cs">
-      <DependentUpon>WelcomeTeacher.aspx</DependentUpon>
+    <Compile Include="T_info.aspx.cs">
+      <DependentUpon>T_info.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WelcomeTeacher.aspx.designer.cs">
-      <DependentUpon>WelcomeTeacher.aspx</DependentUpon>
+    <Compile Include="T_info.aspx.designer.cs">
+      <DependentUpon>T_info.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
