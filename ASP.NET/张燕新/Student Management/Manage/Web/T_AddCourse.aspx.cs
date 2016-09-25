@@ -19,11 +19,12 @@ namespace Web
 
 		protected void OnButtonAdd(object sender, EventArgs e)
 		{
-			if (transfer.AddCourse(TextCourseID.Text.ToString(), TextCourseName.Text.ToString(), Session["UserName"].ToString()))
+			if (transfer.AddCourse(TextCourseID.Text.ToString(), TextCourseName.Text.ToString(), Session["UserName"].ToString(), TextCredit.Text.ToString()))
 			{
 				Response.Write("<script language=javascript>alert('添加课程成功！')</script>");
 				TextCourseID.Text = "";
 				TextCourseName.Text = "";
+				TextCredit.Text = "";
 			}
 			else
 			{
@@ -35,6 +36,7 @@ namespace Web
 		{
 			TextCourseID.Text = "";
 			TextCourseName.Text = "";
+			TextCredit.Text = "";
 		}
 	}
 }

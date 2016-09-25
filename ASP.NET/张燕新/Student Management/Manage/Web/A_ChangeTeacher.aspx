@@ -10,6 +10,9 @@
 		<Columns>
 			<asp:BoundField DataField="TeacherID" HeaderText="教师工号" ReadOnly="True" />
 			<asp:BoundField DataField="TeacherName" HeaderText="教师姓名" />
+			<asp:BoundField DataField="TeacherSex" HeaderText="性别" />
+			<asp:BoundField DataField="TeacherAge" HeaderText="年龄" />
+			<asp:BoundField DataField="TeacherMajor" HeaderText="专业" />
 			<asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
 		</Columns>
 	</asp:GridView>

@@ -10,6 +10,10 @@
 		<Columns>
 			<asp:BoundField DataField="StudentID" HeaderText="学生学号" ReadOnly="True" />
 			<asp:BoundField DataField="StudentName" HeaderText="学生姓名" />
+			<asp:BoundField DataField="StudentSex" HeaderText="性别" />
+			<asp:BoundField DataField="StudentAge" HeaderText="年龄" />
+			<asp:BoundField DataField="StudentMajor" HeaderText="专业" />
+			<asp:BoundField DataField="StudentClass" HeaderText="班级" />
 			<asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
 		</Columns>
 	</asp:GridView>

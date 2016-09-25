@@ -24,6 +24,16 @@
 						ErrorMessage="请输入课程名" Display="Dynamic"></asp:RequiredFieldValidator>
 				</td>
 			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					学分：
+				</td>
+				<td style="width:360px; text-align: left;" colspan="3">
+					<asp:TextBox ID="TextCredit" runat="server"></asp:TextBox>
+					<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextCredit"
+						ErrorMessage="请输入学分" Display="Dynamic"></asp:RequiredFieldValidator>
+				</td>
+			</tr>
 		</table>
 		<table>
 			<tr>

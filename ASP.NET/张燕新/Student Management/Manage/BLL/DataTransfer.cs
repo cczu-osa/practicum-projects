@@ -10,7 +10,7 @@ namespace BLL
 {
 	public partial class DataTransfer
 	{
-		// 帐号登录
+		//帐号登录
 		public int Login(string UserName, string PassWord)
 		{
 			string sql = string.Format("select Users.UserRole from Users where UserName = '{0}' and PassWord = '{1}'", UserName, PassWord);
@@ -23,12 +23,14 @@ namespace BLL
 			else return 0;
 		}
 
+		//个人信息
 		public MySqlDataReader GetSelfinfo(string ID,string Role)
 		{
 			string sql = string.Format("select * from {1} where {1}ID = '{0}'", ID, Role);
 			MySqlDataReader dr = DBHelper.ExecuteReader(sql);
 			return dr;
 		}
+
 		//修改密码
 		public bool ModifyPassword(string UserName,string OldPassWord,string NewPassWord)
 		{
@@ -46,10 +48,19 @@ namespace BLL
 		//获取学生选课信息
 		public DataSet GetSelectCourse(string StudentID)
 		{
-			string sql = string.Format("DROP TEMPORARY TABLE IF EXISTS Temp;CREATE TEMPORARY TABLE Temp SELECT * FROM SelectCourse Where StudentID='{0}';SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,Temp.Status,Temp.Score FROM Courses LEFT JOIN Temp ON Courses.CourseID=Temp.CourseID LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID", StudentID);
+			string sql = string.Format("SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,SelectCourse.`Status`,SelectCourse.Score,Courses.Credit FROM Courses LEFT JOIN SelectCourse ON Courses.CourseID=SelectCourse.CourseID LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID WHERE SelectCourse.StudentID = '{0}'", StudentID);
 			DataSet ds = DBHelper.getDataSet(sql, "SelectCourse");
 			return ds;
 		}
+
+		//获取学生已修课程信息
+		public DataSet GetFinishCourse(string StudentID)
+		{
+			string sql = string.Format("SELECT Courses.CourseID,Courses.CourseName,Teacher.TeacherName,SelectCourse.`Status`,SelectCourse.Score,Courses.Credit FROM Courses,SelectCourse,Teacher WHERE Courses.CourseID=SelectCourse.CourseID  AND Courses.TeacherID=Teacher.TeacherID AND SelectCourse.StudentID = '{0}' AND SelectCourse.`Status`='已选' ORDER BY Courses.CourseID", StudentID);
+			DataSet ds = DBHelper.getDataSet(sql, "FinishCourse");
+			return ds;
+		}
+		
 
 		//获取教师任课信息
 		public DataSet GetTeachCourseInfo(string TeacherID)
@@ -83,10 +94,10 @@ namespace BLL
 			return ds;
 		}
 
-		//获取所以课程信息
+		//获取教师的课程信息
 		public DataSet GetCourseInfo(string TeacherID)
 		{
-			string sql = string.Format("SELECT Courses.*,Teacher.TeacherName FROM Courses LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID WHERE Teacher.TeacherID = {0}", TeacherID);
+			string sql = string.Format("SELECT Courses.* FROM Courses LEFT JOIN Teacher ON Courses.TeacherID=Teacher.TeacherID WHERE Teacher.TeacherID = {0}", TeacherID);
 			DataSet ds = DBHelper.getDataSet(sql, "CourseInfo");
 			return ds;
 		}
@@ -163,20 +174,20 @@ namespace BLL
 		}
 
 		//添加课程
-		public bool AddCourse(string CourseID, string Name, string TeacherID)
+		public bool AddCourse(string CourseID, string Name, string TeacherID, string Credit)
 		{
 			string sql = string.Format("select Courses.CourseID from Courses where CourseID = '{0}'", CourseID);
 			object obj = DBHelper.ExecuteScalar(sql);
 			if (obj != null) return false;
-			sql = string.Format("INSERT INTO Courses VALUES('{0}','{1}','{2}')", CourseID, Name, TeacherID);
+			sql = string.Format("INSERT INTO Courses VALUES('{0}','{1}','{2}','{3}')", CourseID, Name, TeacherID, Credit);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
 
 		//修改学生信息
-		public bool UpdateStudent(string ID,string Name)
+		public bool UpdateStudent(string ID, string Name, string Sex, string Age, string Major, string Class)
 		{
-			string sql = string.Format("UPDATE Student SET StudentName = '{1}' WHERE StudentID = '{0}'",ID, Name);
+			string sql = string.Format("UPDATE Student SET StudentName = '{1}',StudentSex ='{2}',StudentAge ='{3}',StudentMajor ='{4}',StudentClass = '{5}' WHERE StudentID = '{0}'", ID, Name, Sex, Age, Major, Class);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
@@ -190,9 +201,9 @@ namespace BLL
 		}
 
 		//修改教师信息
-		public bool UpdateTeacher(string ID, string Name)
+		public bool UpdateTeacher(string ID, string Name, string Sex, string Age, string Major)
 		{
-			string sql = string.Format("UPDATE Teacher SET TeacherName = '{1}' WHERE TeacherID = '{0}'", ID, Name);
+			string sql = string.Format("UPDATE Teacher SET TeacherName = '{1}',TeacherSex ='{2}',TeacherAge ='{3}',TeacherMajor ='{4}' WHERE TeacherID = '{0}'", ID, Name, Sex, Age, Major);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
@@ -206,9 +217,9 @@ namespace BLL
 		}
 
 		//修改课程信息
-		public bool UpdateCourse(string ID, string Name, string TeacherID)
+		public bool UpdateCourse(string ID, string Name, string TeacherID, string Credit)
 		{
-			string sql = string.Format("UPDATE Courses SET CourseName='{1}',TeacherID = '{2}' WHERE CourseID = '{0}'", ID, Name,TeacherID);
+			string sql = string.Format("UPDATE Courses SET CourseName='{1}',Credit = '{3}' WHERE CourseID = '{0}' and TeacherID = '{2}'", ID, Name, TeacherID, Credit);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}

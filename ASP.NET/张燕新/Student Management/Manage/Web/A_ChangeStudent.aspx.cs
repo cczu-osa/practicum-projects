@@ -37,7 +37,11 @@ namespace Web
 		{
 			string ID = GridView.Rows[e.RowIndex].Cells[0].Text.ToString();
 			string Name = ((TextBox)GridView.Rows[e.RowIndex].Cells[1].Controls[0]).Text.ToString();
-			transfer.UpdateStudent(ID,Name);
+			string Sex = ((TextBox)GridView.Rows[e.RowIndex].Cells[2].Controls[0]).Text.ToString();
+			string Age = ((TextBox)GridView.Rows[e.RowIndex].Cells[3].Controls[0]).Text.ToString();
+			string Major = ((TextBox)GridView.Rows[e.RowIndex].Cells[4].Controls[0]).Text.ToString();
+			string Class = ((TextBox)GridView.Rows[e.RowIndex].Cells[5].Controls[0]).Text.ToString();
+			transfer.UpdateStudent(ID, Name, Sex, Age, Major, Class);
 			GridView.EditIndex = -1;
 			bind();
 		}

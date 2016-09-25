@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLeft.ascx" />
+    <Content Include="S_Graduation.aspx" />
     <Content Include="T_AddCourse.aspx" />
     <Content Include="A_AddStudent.aspx" />
     <Content Include="A_AddTeacher.aspx" />
@@ -110,6 +111,13 @@
     </Compile>
     <Compile Include="AdminMasterPage.Master.designer.cs">
       <DependentUpon>AdminMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="S_Graduation.aspx.cs">
+      <DependentUpon>S_Graduation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="S_Graduation.aspx.designer.cs">
+      <DependentUpon>S_Graduation.aspx</DependentUpon>
     </Compile>
     <Compile Include="T_AddCourse.aspx.cs">
       <DependentUpon>T_AddCourse.aspx</DependentUpon>

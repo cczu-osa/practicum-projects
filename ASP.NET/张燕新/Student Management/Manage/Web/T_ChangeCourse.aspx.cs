@@ -37,8 +37,8 @@ namespace Web
 		{
 			string ID = GridView.Rows[e.RowIndex].Cells[0].Text.ToString();
 			string Name = ((TextBox)GridView.Rows[e.RowIndex].Cells[1].Controls[0]).Text.ToString();
-			string TeacherID = ((TextBox)GridView.Rows[e.RowIndex].Cells[2].Controls[0]).Text.ToString();
-			transfer.UpdateCourse(ID, Name,TeacherID);
+			string Credit = ((TextBox)GridView.Rows[e.RowIndex].Cells[2].Controls[0]).Text.ToString();
+			transfer.UpdateCourse(ID, Name,Session["UserName"].ToString(), Credit);
 			GridView.EditIndex = -1;
 			bind();
 		}
@@ -52,7 +52,6 @@ namespace Web
 		protected void GridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
 		{
 			string ID = GridView.Rows[e.RowIndex].Cells[0].Text.ToString();
-			string Name = GridView.Rows[e.RowIndex].Cells[1].Text.ToString();
 			transfer.DeleteCourse(ID);
 			GridView.EditIndex = -1;
 			bind();
