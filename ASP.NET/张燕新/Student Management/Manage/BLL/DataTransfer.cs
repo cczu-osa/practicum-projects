@@ -60,7 +60,6 @@ namespace BLL
 			DataSet ds = DBHelper.getDataSet(sql, "FinishCourse");
 			return ds;
 		}
-		
 
 		//获取教师任课信息
 		public DataSet GetTeachCourseInfo(string TeacherID)
@@ -92,6 +91,20 @@ namespace BLL
 			string sql = string.Format("SELECT * FROM Teacher");
 			DataSet ds = DBHelper.getDataSet(sql, "TeacherInfo");
 			return ds;
+		}
+
+		//获取学生毕业设计成绩
+		public object GetStudentGradScore(string ID)
+		{
+			string sql = string.Format("SELECT Student.StudentGradScore FROM Student WHERE StudentID ='{0}'", ID);
+			return DBHelper.ExecuteScalar(sql);
+		}
+
+		//获取学生毕业学分要求
+		public object GetStudentAllScoreRequire(string ID)
+		{
+			string sql = string.Format("SELECT Student.StudentAllScoreRequire FROM Student WHERE StudentID ='{0}'", ID);
+			return DBHelper.ExecuteScalar(sql);
 		}
 
 		//获取教师的课程信息
@@ -151,13 +164,12 @@ namespace BLL
 		}
 
 		//添加学生
-		public bool AddStudent(string ID, string Name, string PassWord, string Sex, string Age, string Major, string Class)
+		public bool AddStudent(string ID, string Name, string PassWord, string Sex, string Age, string Major, string Class, string AllScoreRequire)
 		{
-
 			string sql = string.Format("select Users.UserRole from Users where UserName = '{0}'", ID);
 			object obj = DBHelper.ExecuteScalar(sql);
 			if (obj != null) return false;
-			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Student');INSERT INTO Student VALUES('{0}','{1}','{2}','{3}','{4}','{5}')", ID, Name, PassWord, Sex, Age, Major, Class);
+			sql = string.Format("INSERT INTO Users VALUES('{0}','{2}','Student');INSERT INTO Student VALUES('{0}','{1}','{2}','{3}','{4}','{5}','0','60','{6}')", ID, Name, PassWord, Sex, Age, Major, Class, AllScoreRequire);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}
@@ -185,9 +197,9 @@ namespace BLL
 		}
 
 		//修改学生信息
-		public bool UpdateStudent(string ID, string Name, string Sex, string Age, string Major, string Class)
+		public bool UpdateStudent(string ID, string Name, string Sex, string Age, string Major, string Class, string AllScoreRequire)
 		{
-			string sql = string.Format("UPDATE Student SET StudentName = '{1}',StudentSex ='{2}',StudentAge ='{3}',StudentMajor ='{4}',StudentClass = '{5}' WHERE StudentID = '{0}'", ID, Name, Sex, Age, Major, Class);
+			string sql = string.Format("UPDATE Student SET StudentName = '{1}',StudentSex ='{2}',StudentAge ='{3}',StudentMajor ='{4}',StudentClass = '{5}',StudentAllScoreRequire='{6}' WHERE StudentID = '{0}'", ID, Name, Sex, Age, Major, Class, AllScoreRequire);
 			if (DBHelper.ExecuteNonQuery(sql) == 0) return false;
 			else return true;
 		}

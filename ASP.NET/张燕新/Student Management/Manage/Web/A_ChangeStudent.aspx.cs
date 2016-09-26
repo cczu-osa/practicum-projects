@@ -41,7 +41,8 @@ namespace Web
 			string Age = ((TextBox)GridView.Rows[e.RowIndex].Cells[3].Controls[0]).Text.ToString();
 			string Major = ((TextBox)GridView.Rows[e.RowIndex].Cells[4].Controls[0]).Text.ToString();
 			string Class = ((TextBox)GridView.Rows[e.RowIndex].Cells[5].Controls[0]).Text.ToString();
-			transfer.UpdateStudent(ID, Name, Sex, Age, Major, Class);
+			string AllScoreRequire = ((TextBox)GridView.Rows[e.RowIndex].Cells[6].Controls[0]).Text.ToString();
+			transfer.UpdateStudent(ID, Name, Sex, Age, Major, Class, AllScoreRequire);
 			GridView.EditIndex = -1;
 			bind();
 		}

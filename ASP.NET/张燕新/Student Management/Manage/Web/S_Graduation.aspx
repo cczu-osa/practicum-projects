@@ -13,4 +13,41 @@
 			</Columns>
 		</asp:GridView>
 	</div>
+	<div>
+		<table>
+			<tr>
+				<td>
+					<span>毕业设计成绩：</span>
+				</td>
+				<td>
+					<asp:Label ID="TextGradScore" runat="server"></asp:Label>
+				</td>
+				<td>
+					<span>毕业要求：</span>
+				</td>
+				<td>
+					<asp:Label ID="TextGradScoreRequire" runat="server"></asp:Label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span>总学分绩点：</span>
+				</td>
+				<td>
+					<asp:Label ID="TextAllScore" runat="server"></asp:Label>
+				</td>
+				<td>
+					<span>毕业要求：</span>
+				</td>
+				<td>
+					<asp:Label ID="TextAllScoreRequire" runat="server"></asp:Label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" align="center">
+					<asp:Button ID="Button" runat="server" Text="毕业检查" OnClick="OnButton"/>
+				</td>
+			</tr>
+		</table>
+	</div>
 </asp:Content>

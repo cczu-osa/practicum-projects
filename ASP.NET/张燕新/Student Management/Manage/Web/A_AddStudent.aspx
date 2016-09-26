@@ -80,6 +80,14 @@
 					<asp:TextBox ID="TextStudentClass" runat="server"></asp:TextBox>
 				</td>
 			</tr>
+			<tr>
+				<td style="width:96px; text-align: right">
+					学分要求：
+				</td>
+				<td style="width:360px; text-align: left" colspan="3">
+					<asp:TextBox ID="TextStudenttAllScoreRequire" runat="server"></asp:TextBox>
+				</td>
+			</tr>
 		</table>
 		<table>
 			<tr>
