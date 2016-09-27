@@ -9,7 +9,7 @@ using BLL;
 
 namespace Web
 {
-	public partial class T_ChangeCourse : System.Web.UI.Page
+	public partial class A_ChangeCourse : System.Web.UI.Page
 	{
 		private DataTransfer transfer = new DataTransfer();
 
@@ -21,8 +21,8 @@ namespace Web
 		//GridView绑定数据
 		private void bind()
 		{
-			DataSet ds = transfer.GetTeacherCourseInfo(Session["UserName"].ToString());
-			GridView.DataSource = ds.Tables["TeacherCourseInfo"].DefaultView;
+			DataSet ds = transfer.GetCourseInfo();
+			GridView.DataSource = ds.Tables["CourseInfo"].DefaultView;
 			GridView.DataBind();
 			ds.Dispose();
 		}
@@ -36,8 +36,9 @@ namespace Web
 		protected void GridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
 		{
 			string ID = GridView.Rows[e.RowIndex].Cells[0].Text.ToString();
-			string Where = ((TextBox)GridView.Rows[e.RowIndex].Cells[3].Controls[0]).Text.ToString();
-			transfer.UpdateTeacherCourse(ID, Session["UserName"].ToString(), Where);
+			string Name = ((TextBox)GridView.Rows[e.RowIndex].Cells[1].Controls[0]).Text.ToString();
+			string Credit = ((TextBox)GridView.Rows[e.RowIndex].Cells[2].Controls[0]).Text.ToString();
+			transfer.UpdateCourse(ID, Name, Credit);
 			GridView.EditIndex = -1;
 			bind();
 		}
@@ -51,7 +52,7 @@ namespace Web
 		protected void GridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
 		{
 			string ID = GridView.Rows[e.RowIndex].Cells[0].Text.ToString();
-			transfer.DeleteTeacherCourse(ID, Session["UserName"].ToString());
+			transfer.DeleteCourse(ID);
 			GridView.EditIndex = -1;
 			bind();
 		}

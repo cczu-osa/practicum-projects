@@ -14,7 +14,8 @@
 			<asp:BoundField DataField="StudentAge" HeaderText="年龄" />
 			<asp:BoundField DataField="StudentMajor" HeaderText="专业" />
 			<asp:BoundField DataField="StudentClass" HeaderText="班级" />
-			<asp:BoundField DataField="StudentAllScoreRequire" HeaderText="学分要求" />
+			<asp:BoundField DataField="StudentAllScoreRequire" HeaderText="学分要求" 
+				NullDisplayText="180" />
 			<asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
 		</Columns>
 	</asp:GridView>

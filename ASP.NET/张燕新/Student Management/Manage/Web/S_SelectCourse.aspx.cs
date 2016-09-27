@@ -30,11 +30,12 @@ namespace Web
 		protected void RowCommand(object sender, GridViewCommandEventArgs e)
 		{
 			int index = Convert.ToInt32(e.CommandArgument);
-			string CourseID =GridView.Rows[index].Cells[0].Text.ToString();
+			string CourseID = GridView.Rows[index].Cells[0].Text.ToString();
+			string TeacherID = GridView.Rows[index].Cells[2].Text.ToString();
 			string StudentID = Session["UserName"].ToString();
 			if (e.CommandName == "SelectCourse")
 			{
-				int ret=transfer.Select(CourseID,StudentID);
+				int ret=transfer.Select(CourseID,TeacherID,StudentID);
 				switch (ret)
 				{
 					case 0:

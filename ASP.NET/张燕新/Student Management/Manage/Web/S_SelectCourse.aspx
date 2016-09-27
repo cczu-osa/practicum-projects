@@ -7,6 +7,7 @@
 			<Columns>
 				<asp:BoundField HeaderText="课程编号" DataField="CourseID" />
 				<asp:BoundField HeaderText="课程名称" DataField="CourseName" />
+				<asp:BoundField DataField="TeacherID" HeaderText="教师编号" />
 				<asp:BoundField HeaderText="任课教师" DataField="TeacherName" />
 				<asp:BoundField HeaderText="选课情况" DataField="Status" NullDisplayText="未选" />
 				<asp:BoundField DataField="Score" HeaderText="成绩" NullDisplayText="0" ReadOnly="True" />

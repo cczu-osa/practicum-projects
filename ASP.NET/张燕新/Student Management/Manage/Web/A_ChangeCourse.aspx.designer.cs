@@ -10,7 +10,7 @@
 namespace Web {
     
     
-    public partial class T_ChangeCourse {
+    public partial class A_ChangeCourse {
         
         /// <summary>
         /// GridView 控件。

@@ -4,27 +4,41 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using BLL;
 
 namespace Web
 {
-	public partial class A_AddCourse : System.Web.UI.Page
+	public partial class T_AddCourse : System.Web.UI.Page
 	{
 		private DataTransfer transfer = new DataTransfer();
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			if (!Page.IsPostBack)
+			{
+				DataSet ds = transfer.GetCourseInfo();
+				DropDownList.DataSource = ds.Tables["CourseInfo"].DefaultView;
+				DropDownList.DataTextField = "CourseName";
+				DropDownList.DataValueField = "CourseID";
+				DropDownList.DataBind();
+				ds.Dispose();
+				bind();
+			}
+		}
 
+		//Label绑定数据
+		private void bind()
+		{
+			TextCredit.Text = transfer.GetCourseCredit(DropDownList.SelectedValue.ToString()).ToString();
 		}
 
 		protected void OnButtonAdd(object sender, EventArgs e)
 		{
-			if (transfer.AddCourse(TextCourseID.Text.ToString(), TextCourseName.Text.ToString(), Session["UserName"].ToString(), TextCredit.Text.ToString()))
+			if (transfer.AddTeacherCourse(DropDownList.SelectedValue.ToString(), Session["UserName"].ToString(),TextWhere.Text.ToString()))
 			{
 				Response.Write("<script language=javascript>alert('添加课程成功！')</script>");
-				TextCourseID.Text = "";
-				TextCourseName.Text = "";
-				TextCredit.Text = "";
+				TextWhere.Text = "";
 			}
 			else
 			{
@@ -34,9 +48,17 @@ namespace Web
 
 		protected void OnButtonReset(object sender, EventArgs e)
 		{
-			TextCourseID.Text = "";
-			TextCourseName.Text = "";
-			TextCredit.Text = "";
+			TextWhere.Text = "";
+		}
+
+		protected void DropDownList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			bind();
+		}
+
+		protected void DropDownList_TextChanged(object sender, EventArgs e)
+		{
+			bind();
 		}
 	}
 }
