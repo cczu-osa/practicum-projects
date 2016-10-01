@@ -130,6 +130,13 @@ namespace BLL
 			return ds;
 		}
 
+		//获取统计数据
+		public object GetStudentCount(string CourseID,string TeacherID,string str)
+		{
+			string sql = string.Format("SELECT COUNT(StudentID) FROM SelectCourse WHERE CourseID = '{0}' AND TeacherID= '{1}' AND Score<={2}", CourseID, TeacherID, str);
+			return DBHelper.ExecuteScalar(sql);
+		}
+
 		//选课
 		public int Select(string CourseID,string TeacherID, string StudentID)
 		{
@@ -170,7 +177,7 @@ namespace BLL
 				if (Status == "未选") return 1;
 				else if (Status == "已选")
 				{
-					sql = string.Format("DELETE FROM SelectCourse WHERE  WHERE CourseID='{0}' AND StudentID = '{1}'", CourseID, StudentID);
+					sql = string.Format("DELETE FROM SelectCourse WHERE CourseID='{0}' AND StudentID = '{1}'", CourseID, StudentID);
 					if (DBHelper.ExecuteNonQuery(sql) == 0) return 0;
 					else return 2;
 				}
