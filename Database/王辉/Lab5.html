@@ -1,0 +1,173 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/materialize/0.97.6/css/materialize.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style type="text/css">
+            .main {
+                margin: 5px auto;
+                max-width: 1080px;
+            }
+            .tran {
+                margin: 20px auto;
+                max-width: 1080px;
+            }
+            .rspd {
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- Header -->
+            <nav style="padding-left: 20px; padding-right: 20px;">
+                <div class="nav-wrapper">
+                    <a class="brand-logo">School Database</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li v-for="table in tables"><a onclick="vm.navgateTable('{{table}}')">{{table}}</a></li>
+                        <li><a onclick="gotoTran()">Transaction</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Table -->
+            <div class="main">
+                <table>
+                    <thead>
+                        <tr>
+                            <template v-for="ctitle in ctitles">
+                                <th data-field="{{ctitle.name}}">{{ctitle.name}}</th>
+                            </template>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="row in rows">
+                            <tr>
+                                <template v-for="ctitle in ctitles">
+                                    <td>{{row[ctitle.name]}}</td>
+                                </template>
+                                <td><a class="btn btn-small waves-effect waves-light" v-on:click="dropValue($index)"><i class="material-icons">delete</i></a></td>
+                            </tr>
+                        </template>
+                        <tr>
+                            <template v-for="ctitle in ctitles">
+                                <td><input type="text" name="{{ctitle.name}}" placeholder="{{ctitle.def}}"></input></td>
+                            </template>
+                            <td><a class="btn btn-small waves-effect waves-light" v-on:click="updateValue"><i class="material-icons">send</i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="https://cdn.bootcss.com/vue/1.0.27/vue.common.js"></script>
+        <script src="https://cdn.bootcss.com/jquery/1.12.2/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/materialize/0.97.6/js/materialize.min.js"></script>
+        <script>
+            var Data = {
+                currentTableName: 'No table selected.',
+                tables: [],
+                ctitles: [],
+                rows: []
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: Data,
+                created: function () {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:2333/?query=show%20tables',
+                        success: function(response) {
+                            var data = JSON.parse(response);
+                            Data.tables = data.map((a, b, c) => {
+                                return a.Tables_in_school;
+                            })
+                            vm.navgateTable(Data.tables[Data.tables.length - 1]);
+                        }
+                    });
+                },
+                methods: {
+                    navgateTable: function(table) {
+                        $('.tran').css('display', 'none');
+                        $('.main').css('display', '');
+                        if (table)
+                            this.currentTableName = table;
+                        else
+                            table = this.currentTableName;
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:2333/?query=desc%20' + table,
+                            success: function(response) {
+                                var data = JSON.parse(response);
+                                Data.ctitles = data.map((a, b, c) => {
+                                    return {name: a.Field, def: a.Default};
+                                });
+                                vm.flushContent(table);
+                            }
+                        });
+                    },
+                    flushContent: function(table) {
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:2333/?query=select%20*%20from%20' + table,
+                            success: function(response) {
+                                Data.rows = JSON.parse(response);
+                            }
+                        });
+                    },
+                    dropValue: function(index) {
+                        var sql = 'DELETE FROM ' + this.currentTableName + ' WHERE ' + this.currentTableName + '.' + this.ctitles[0].name + ' = \'' + this.rows[index][this.ctitles[0].name] + '\'';
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:2333/?query=' + sql,
+                            success: function(response) {
+                                if (response.indexOf('errno') > 0) {
+                                    Materialize.toast('Server report a error.', 10000);
+                                    return;
+                                }
+                                vm.navgateTable(this.currentTableName);
+                                Materialize.toast('Great success!', 4000);
+                            }
+                        });
+                    },
+                    updateValue: function() {
+                        var content = '';
+                        var tb = '';
+                        // check if all the non-default blank has its value
+                        for (var i = 0; i != this.ctitles.length; ++i) {
+                            var val = document.getElementsByName(this.ctitles[i].name)[0].value;
+                            if (val == '' && this.ctitles[i].def == null) {
+                                Materialize.toast('Please fill all the blank without placeholder!', 4000);
+                                return;
+                            }
+                            content += '\'';
+                            if (val == '')
+                                content += this.ctitles[i].def;
+                            else
+                                content += val;
+                            content += '\'';
+                            tb += '`' + this.ctitles[i].name + '`';
+                            if (i != this.ctitles.length - 1) {
+                                content += ', ';
+                                tb += ', ';
+                            }
+                        }
+                        var sql = 'INSERT%20INTO%20' + this.currentTableName + '(' + tb + ')' + '%20VALUES(' + content + ')';
+                        $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:2333/?query=' + sql,
+                            success: function(response) {
+                                if (response.indexOf('errno') > 0) {
+                                    Materialize.toast('Server report a error.', 10000);
+                                    return;
+                                }
+                                vm.navgateTable(this.currentTableName);
+                                Materialize.toast('Great success!', 4000);
+                            }
+                        });
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
