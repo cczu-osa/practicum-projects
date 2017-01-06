@@ -1,0 +1,57 @@
+DROP DATABASE IF EXISTS db;
+CREATE DATABASE db;
+USE db;
+
+DROP TABLE IF EXISTS dict;
+CREATE TABLE dict(
+    dict_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    dict_category INTEGER,
+    dict_value VARCHAR(500)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS user;
+CREATE TABLE user(
+    user_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    role INTEGER NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS officer;
+CREATE TABLE officer(
+    officer_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    officer_name VARCHAR(50) NOT NULL,
+    officer_gender VARCHAR(50),
+    officer_major VARCHAR(50),
+    officer_job VARCHAR(50),
+    officer_license_id VARCHAR(50),
+    officer_locale_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (officer_locale_id) REFERENCES dict(dict_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS news;
+CREATE TABLE news(
+    news_policy_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    news_title VARCHAR(250) NOT NULL,
+    news_content TEXT NOT NULL,
+    news_date VARCHAR(50),
+    news_type_id INTEGER,
+    news_status_id INTEGER,
+    file_type_id INTEGER,
+    publish_officer_id INTEGER,
+    FOREIGN KEY (news_type_id) REFERENCES dict(dict_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (news_status_id) REFERENCES dict(dict_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (file_type_id) REFERENCES dict(dict_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (publish_officer_id) REFERENCES dict(dict_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS token;
+CREATE TABLE token(
+    access_token VARCHAR(100) PRIMARY KEY NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO user(username, password, role) VALUES('root', '233666', 0);
