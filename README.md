@@ -19,4 +19,5 @@
   - [石林](Database/石林)
 - [Information-security](Information-security)
   - [孙霓刚](Information-security/孙霓刚)
-  
+- [Microcomputer-Principle](Microcomputer-Principle)
+  - [潘操](Microcomputer-Principle/潘操)
